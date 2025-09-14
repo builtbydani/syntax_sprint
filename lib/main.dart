@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models/language.dart';
 import 'viewmodels/round_view_model.dart';
+import 'viewmodels/settings.dart';
+import 'viewmodels/language.dart';
 import 'views/syntax_sprint_page.dart';
 
 void main() => runApp(const SyntaxSprintApp());
@@ -33,21 +34,5 @@ class SyntaxSprintApp extends StatelessWidget {
         home: const SyntaxSprintPage(),
       ),
     );
-  }
-}
-
-class SettingsViewModel extends ChangeNotifier {
-  bool strict = true;
-  void toggleStrict() {
-    strict = !strict;
-    notifyListeners();
-  }
-}
-
-class LanguageViewModel extends ChangeNotifier {
-  Language selected = Language.python;
-  void setLanguage(Language value) {
-    selected = value;
-    notifyListeners();
   }
 }
