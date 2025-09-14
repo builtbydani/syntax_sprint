@@ -17,6 +17,36 @@ class RoundViewModel extends ChangeNotifier {
   bool strictSpacing = true;
   bool showHint = false;
 
+  void setStrictSpacing(bool value) {
+    strictSpacing = value;
+    notifyListeners();
+  }
+
+  void setShowHint(bool value) {
+    showHint = value;
+    notifyListeners();
+  }
+
+  void setMixedMode(bool value) {
+    mixed = value;
+    notifyListeners();
+  }
+
+  void toggleLanguage(Language lang) {
+    if (enabled.contains(lang)) {
+      if (enabled.length == 1) return;
+      enabled.remove(lang);
+    } else {
+      enabled.add(lang);
+    }
+    notifyListeners();
+  }
+
+  void setFixedLanguage(Language lang) {
+    fixed = lang;
+    notifyListeners();
+  }
+
   // Round state
   late RoundSpec current = _pickNext(null);
   final TextEditingController controller = TextEditingController();

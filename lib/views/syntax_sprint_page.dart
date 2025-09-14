@@ -94,9 +94,9 @@ class _SyntaxSprintPageState extends State<SyntaxSprintPage> {
                               Switch(
                                 value: vm.strictSpacing,
                                 onChanged: (v) {
-                                  final r = context.read<RoundViewModel>();
-                                  r.strictSpacing = v;
-                                  r.notifyListeners();
+                                  context
+                                      .read<RoundViewModel>()
+                                      .setStrictSpacing(v);
                                 },
                               ),
                             ],
@@ -111,9 +111,9 @@ class _SyntaxSprintPageState extends State<SyntaxSprintPage> {
                               Switch(
                                 value: vm.showHint,
                                 onChanged: (v) {
-                                  final r = context.read<RoundViewModel>();
-                                  r.showHint = v;
-                                  r.notifyListeners();
+                                  context
+                                      .read<RoundViewModel>()
+                                      .setStrictSpacing(v);
                                 },
                               ),
                             ],
@@ -311,11 +311,9 @@ class _SyntaxSprintPageState extends State<SyntaxSprintPage> {
                           ButtonSegment(value: false, label: Text('Fixed')),
                         ],
                         selected: {vm.mixed},
-                        onSelectionChanged: (s) {
-                          final r = context.read<RoundViewModel>();
-                          r.mixed = s.first;
-                          r.notifyListeners();
-                        },
+                        onSelectionChanged: (s) => context
+                            .read<RoundViewModel>()
+                            .setMixedMode(s.first),
                       ),
                       const SizedBox(height: 12),
                       if (vm.mixed)
@@ -326,18 +324,9 @@ class _SyntaxSprintPageState extends State<SyntaxSprintPage> {
                             return FilterChip(
                               selected: on,
                               label: Text(langLabel(l)),
-                              onSelected: (v) {
-                                if (!v && vm.enabled.length == 1) {
-                                  return; // keep at least one
-                                }
-                                final r = context.read<RoundViewModel>();
-                                if (v) {
-                                  r.enabled.add(l);
-                                } else {
-                                  r.enabled.remove(l);
-                                }
-                                r.notifyListeners();
-                              },
+                              onSelected: (_) => context
+                                  .read<RoundViewModel>()
+                                  .toggleLanguage(l),
                             );
                           }).toList(),
                         ),
@@ -349,11 +338,9 @@ class _SyntaxSprintPageState extends State<SyntaxSprintPage> {
                             return ChoiceChip(
                               selected: on,
                               label: Text(langLabel(l)),
-                              onSelected: (_) {
-                                final r = context.read<RoundViewModel>();
-                                r.fixed = l;
-                                r.notifyListeners();
-                              },
+                              onSelected: (_) => context
+                                  .read<RoundViewModel>()
+                                  .setFixedLanguage(l),
                             );
                           }).toList(),
                         ),
