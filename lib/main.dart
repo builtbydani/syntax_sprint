@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'models/concept.dart';
 import 'models/language.dart';
 import 'models/round_spec.dart';
+import 'viewmodels/round_view_model.dart';
 
 void main() => runApp(const SyntaxSprintApp());
 
@@ -17,6 +18,7 @@ class SyntaxSprintApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsViewModel()),
         ChangeNotifierProvider(create: (_) => LanguageViewModel()),
+        ChangeNotifierProvier(create: (_) => RoundViewModel()),
       ],
       child: MaterialApp(
         title: 'SyntaxSprint',
